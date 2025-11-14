@@ -37,6 +37,12 @@ WORKDIR /app
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser
 
+
+# Esta es tu línea 38 (aprox)
+RUN ./gradlew bootJar --no-daemon
+
+# ¡¡AGREGÁ ESTA LÍNEA TEMPORAL!!
+RUN ls -la /app/build/libs
 # Copiamos el JAR generado en la ETAPA 1
 # ¡¡IMPORTANTE: Verificá que este sea el nombre correcto!!
 COPY --from=build /app/build/libs/Mutantes-api-1.0-SNAPSHOT.jar ./app.jar
