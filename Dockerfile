@@ -36,7 +36,7 @@ USER appuser
 # ⚠️ IMPORTANTE: ¡Asegurate de que este nombre sea el correcto!
 # (En el log anterior te falló "Mutantes-api-1.0-SNAPSHOT.jar",
 # tenés que poner el nombre que genera tu build de verdad).
-COPY --from=build /app/build/libs/Mutantes-api-1.0-SNAPSHOT.jar ./app.jar
+COPY --from=build /app/build/libs/ExamenMercado-1.0-SNAPSHOT.jar ./app.jar
 
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
