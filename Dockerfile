@@ -1,54 +1,42 @@
 # ========================================
 # ETAPA 1: BUILD (Compilación)
 # ========================================
-# Imagen base ligera de Alpine Linux (~5MB) para compilar el código
-# Se usa "as build" para nombrar esta etapa y referenciarla después
+# Esta etapa se llama "build"
 FROM eclipse-temurin:17-jdk-alpine as build
-
-# Establecemos el directorio de trabajo
 WORKDIR /app
 
-# Copiamos solo los archivos necesarios para construir (Gradle)
+# Copiamos TODOS los archivos de build y el código
 COPY gradlew ./
 COPY gradle ./gradle
 COPY build.gradle ./
 COPY settings.gradle ./
-
-# Copiamos el código fuente
 COPY src ./src
 
-# Damos permisos de ejecución al wrapper de Gradle
+# Damos permisos
 RUN chmod +x ./gradlew
 
-# Ejecutamos Gradle para generar el JAR
-# (Usamos ./gradlew para consistencia, y --no-daemon)
+# ¡¡AQUÍ ES DONDE SE COMPILA!!
+# Esta línea debe estar en la Etapa 1
 RUN ./gradlew bootJar --no-daemon
-
+RUN ls -la /app/build/libs
 # ========================================
 # ETAPA 2: RUNTIME (Ejecución)
 # ========================================
-# Usamos la imagen de JRE (Runtime), que es más ligera
+# Esta es la imagen final, ligera
 FROM eclipse-temurin:17-jre-alpine
-
-# Establecemos el directorio de trabajo
 WORKDIR /app
 
-# (Opcional pero recomendado) Creamos un usuario para no correr como root
+# Creamos un usuario (buenas prácticas)
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser
 
-
-# Esta es tu línea 38 (aprox)
-RUN ./gradlew bootJar --no-daemon
-
-# ¡¡AGREGÁ ESTA LÍNEA TEMPORAL!!
-RUN ls -la /app/build/libs
-# Copiamos el JAR generado en la ETAPA 1
-# ¡¡IMPORTANTE: Verificá que este sea el nombre correcto!!
+# ¡¡AQUÍ SOLO COPIAMOS EL RESULTADO!!
+# Copiamos el JAR de la etapa "build"
+#
+# ⚠️ IMPORTANTE: ¡Asegurate de que este nombre sea el correcto!
+# (En el log anterior te falló "Mutantes-api-1.0-SNAPSHOT.jar",
+# tenés que poner el nombre que genera tu build de verdad).
 COPY --from=build /app/build/libs/Mutantes-api-1.0-SNAPSHOT.jar ./app.jar
 
-# Exponemos el puerto
 EXPOSE 8080
-
-# Comando para ejecutar la aplicación
 ENTRYPOINT ["java", "-jar", "app.jar"]
