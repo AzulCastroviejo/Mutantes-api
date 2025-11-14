@@ -3,7 +3,7 @@
 # ========================================
 # Imagen base ligera de Alpine Linux (~5MB) para compilar el código
 # Se usa "as build" para nombrar esta etapa y referenciarla después
-FROM eclipse-temurin:17-jdk-alpine as buildbuild
+FROM eclipse-temurin:17-jdk-alpine as build
 
 # Establecemos el directorio de trabajo
 WORKDIR /app
