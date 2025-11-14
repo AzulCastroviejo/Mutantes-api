@@ -39,7 +39,7 @@ USER appuser
 
 # Copiamos el JAR generado en la ETAPA 1
 # ¡¡IMPORTANTE: Verificá que este sea el nombre correcto!!
-COPY --from=build /app/build/libs/ExamenMercado-main-1.0-SNAPSHOT.jar ./app.jar
+COPY --from=build /app/build/libs/Mutantes-api-1.0-SNAPSHOT.jar ./app.jar
 
 # Exponemos el puerto
 EXPOSE 8080
