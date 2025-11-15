@@ -1,44 +1,30 @@
-package controller;
-
+package org.example.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.controller.MutantController;
 import org.example.dto.DnaRequest;
 import org.example.dto.StatsResponse;
-import org.example.repository.DnaRecordRepository;
 import org.example.service.MutantService;
 import org.example.service.StatsService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-// Para que encuentre .post() y .get() (y así arreglar el error de .contentType())
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-// Para que encuentre .status() y .jsonPath() (y así arreglar el error de .status())
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-// Para que puedas usar "is()" dentro de tus jsonPath
-
-import static org.hamcrest.Matchers.is;
-
-import static javax.swing.UIManager.get;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.web.servlet.function.ServerResponse.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(MutantController.class)
- class MutantControllerTest {
+class MutantControllerTest {
+
     @Autowired
-private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -61,7 +47,7 @@ private MockMvc mockMvc;
         request.setDna(mutantDna);
 
         when(mutantService.processDna(any(String[].class)))
-                .thenReturn(true); // Mock: es mutante
+                .thenReturn(true);
 
         // ACT & ASSERT
         mockMvc.perform(
@@ -69,7 +55,7 @@ private MockMvc mockMvc;
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(request))
                 )
-                .andExpect(status().isOk()); // 200 OK
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -84,7 +70,7 @@ private MockMvc mockMvc;
         request.setDna(humanDna);
 
         when(mutantService.processDna(any(String[].class)))
-                .thenReturn(false); // Mock: es humano
+                .thenReturn(false);
 
         // ACT & ASSERT
         mockMvc.perform(
@@ -92,7 +78,7 @@ private MockMvc mockMvc;
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(request))
                 )
-                .andExpect(status().isForbidden()); // 403 Forbidden
+                .andExpect(status().isForbidden());
     }
 
     @Test
@@ -115,7 +101,7 @@ private MockMvc mockMvc;
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(request))
                 )
-                .andExpect(status().isForbidden()); // 403
+                .andExpect(status().isForbidden());
     }
 
     @Test
@@ -125,9 +111,8 @@ private MockMvc mockMvc;
         mockMvc.perform(
                         post("/mutant")
                                 .contentType(MediaType.APPLICATION_JSON)
-                        // Sin .content() = body vacío
                 )
-                .andExpect(status().isBadRequest()); // 400 Bad Request
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -213,7 +198,7 @@ private MockMvc mockMvc;
                     .andExpect(status().isOk());
         }
 
-        // VERIFY - Se llamó 3 veces al servicio
+        // VERIFY
         verify(mutantService, times(3)).processDna(any(String[].class));
     }
 }

@@ -1,4 +1,4 @@
-package service;
+package org.example.service;
 
 import org.example.dto.StatsResponse;
 import org.example.repository.DnaRecordRepository;
