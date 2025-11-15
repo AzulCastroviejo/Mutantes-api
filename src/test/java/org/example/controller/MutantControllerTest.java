@@ -25,8 +25,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 // Para que puedas usar "is()" dentro de tus jsonPath
+
 import static org.hamcrest.Matchers.is;
-import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
+
 import static javax.swing.UIManager.get;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
