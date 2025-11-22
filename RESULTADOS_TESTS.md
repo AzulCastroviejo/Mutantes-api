@@ -1,91 +1,17 @@
-# 📊 Resultados de Tests - Proyecto Mutantes
+Resultados de Tests - Proyecto Mutantes
 
-## ✅ Resumen Ejecutivo
 
-- **Total de tests:** 35
-- **Tests pasados:** 35 (100%)
-- **Tests fallidos:** 0
-- **Cobertura total:** ~90%
-- **Cobertura service layer:** ~95%
-- **Estado:** ✅ APROBADO (>80% cobertura)
 
----
+- Proyecto
+![](C:\Users\pcast\OneDrive\Escritorio\Imágenes\Capturas de pantalla\Captura de pantalla 2025-11-15 231902.png)
 
-## 🧪 Distribución de Tests
+- Service
+  ![](C:\Users\pcast\OneDrive\Escritorio\Imágenes\Capturas de pantalla\Captura de pantalla 2025-11-15 231852.png)
 
-### Tests Unitarios (27 tests)
-
-#### MutantDetectorTest (16 tests)
-- ✅ testMutantWithHorizontalAndDiagonalSequences
-- ✅ testMutantWithVerticalSequences
-- ✅ testMutantWithMultipleHorizontalSequences
-- ✅ testMutantWithBothDiagonals
-- ✅ testMutantSmallDna4x4
-- ✅ testMutantLargeDna
-- ✅ testMutantAllSameCharacter
-- ✅ testNotMutantWithOnlyOneSequence
-- ✅ testNotMutantWithNoSequences
-- ✅ testNullDna
-- ✅ testEmptyDna
-- ✅ testNonSquareMatrix
-- ✅ testInvalidCharacters
-- ✅ testNullRowInArray
-- ✅ testEarlyTermination
-- ✅ testSmallMatrix4x4
-
-#### MutantServiceTest (5 tests)
-- ✅ testAnalyzeMutantDnaAndSave
-- ✅ testAnalyzeHumanDnaAndSave
-- ✅ testReturnCachedResultForAnalyzedDna
-- ✅ testConsistentHashGeneration
-- ✅ testSavesRecordWithCorrectHash
-
-#### StatsServiceTest (6 tests)
-- ✅ testGetStatsWithData
-- ✅ testGetStatsWithNoHumans
-- ✅ testGetStatsWithNoData
-- ✅ testGetStatsWithDecimalRatio
-- ✅ testGetStatsWithEqualCounts
-- ✅ testGetStatsWithLargeNumbers
-
-### Tests de Integración (8 tests)
-
-#### MutantControllerTest (8 tests)
-- ✅ testCheckMutantReturns200ForMutant
-- ✅ testCheckMutantReturns403ForHuman
-- ✅ testCheckMutantReturns403ForInvalidDna
-- ✅ testCheckMutantRejectsEmptyBody
-- ✅ testGetStatsReturnsCorrectData
-- ✅ testGetStatsReturns200WithNoData
-- ✅ testCheckMutantAcceptsJsonContentType
-- ✅ testCheckMutantHandlesMultipleRequests
 
 ---
 
-## 📈 Cobertura de Código (JaCoCo)
-
-### Cobertura por Componente
-
-| Componente | Cobertura | Estado |
-|------------|-----------|--------|
-| **MutantDetector.java** | 96% | ✅ Excelente |
-| **MutantService.java** | 95% | ✅ Excelente |
-| **StatsService.java** | 100% | ✅ Perfecto |
-| **MutantController.java** | 100% | ✅ Perfecto |
-| **DTOs** | 60% | ℹ️ Normal (solo getters/setters) |
-| **Entities** | 50% | ℹ️ Normal (código generado por Lombok) |
-
-### Cobertura Total
-
-- **Service Layer:** 95% ✅
-- **Controller Layer:** 100% ✅
-- **Total del proyecto:** 90% ✅
-
-**Nota:** El porcentaje total puede aparecer como ~71% debido a que Lombok genera código automáticamente (equals, hashCode, toString) que se cuenta en las métricas pero raramente se testea. Esto es **normal y aceptable**.
-
----
-
-## 🚀 Comandos para Reproducir
+## Comandos para Reproducir
 
 ### Ejecutar todos los tests
 ```bash
@@ -108,14 +34,14 @@ start build\reports\jacoco\test\html\index.html
 
 ---
 
-## 📁 Ubicación de los Reportes
+## Ubicación de los Reportes
 
 - **Tests:** `build/reports/tests/test/index.html`
 - **Cobertura:** `build/reports/jacoco/test/html/index.html`
 
 ---
 
-## ✨ Conclusión
+## Conclusión
 
 El proyecto cumple con **todos los requisitos de testing**:
 - ✅ Más de 80% de cobertura
@@ -126,5 +52,32 @@ El proyecto cumple con **todos los requisitos de testing**:
 
 ---
 
-**Fecha de generación:** [Tu fecha aquí]
-**Autor:** [Tu nombre aquí]
+## Capturas de Render funcional
+Link de render :  https://mutantes-api-1.onrender.com
+
+![](C:\Users\pcast\OneDrive\Escritorio\Imágenes\Capturas de pantalla\Captura de pantalla 2025-11-16 175948.png)
+
+Capturas de Swagger 
+
+- Con render prueba exitosa de OK 200
+![](C:\Users\pcast\OneDrive\Escritorio\Imágenes\Capturas de pantalla\Captura de pantalla 2025-11-14 125229.png)
+
+- Prueba error 403
+![](C:\Users\pcast\OneDrive\Escritorio\Imágenes\Capturas de pantalla\Captura de pantalla 2025-11-14 125302.png)
+
+---
+
+## Capturas de Swagger funional desde el local
+
+- OK 200
+![](C:\Users\pcast\OneDrive\Escritorio\Imágenes\Capturas de pantalla\Captura de pantalla 2025-11-16 122429.png)
+
+- Error 403
+![](C:\Users\pcast\OneDrive\Escritorio\Imágenes\Capturas de pantalla\Captura de pantalla 2025-11-16 122600.png)
+
+## Capturas de H2 funcional
+
+![](C:\Users\pcast\OneDrive\Escritorio\Imágenes\Capturas de pantalla\Captura de pantalla 2025-11-16 122816.png)
+
+**Fecha de generación:** 18/11/25
+**Autor:** Azul Castroviejo
